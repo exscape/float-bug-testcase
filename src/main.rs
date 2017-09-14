@@ -26,20 +26,24 @@ pub extern fn main() {
             large_delay();
             if 22.625f32 < 0.0 {
                 // Code does NOT execute
-                // Note to self: net LED
-                write_volatile(PORTC, 1);
-                small_delay();
-                write_volatile(PORTC, 0xff);
-                small_delay();
+                // Note to self: stat LED
+                for _ in 0..2 {
+                    write_volatile(PORTC, 1);
+                    small_delay();
+                    write_volatile(PORTC, 0xff);
+                    small_delay();
+                }
             }
             large_delay();
             if 22.625f32 >= 0.0 {
                 // Code executes
-                // Note to self: stat LED
-                write_volatile(PORTC, 2);
-                small_delay();
-                write_volatile(PORTC, 0xff);
-                small_delay();
+                // Note to self: net LED
+                for _ in 0..4 {
+                    write_volatile(PORTC, 2);
+                    small_delay();
+                    write_volatile(PORTC, 0xff);
+                    small_delay();
+                }
             }
         }
 
