@@ -8,44 +8,44 @@ use core::ptr::{read_volatile, write_volatile};
 
 #[no_mangle]
 pub extern fn main() {
-	small_delay();
-	unsafe {
-		write_volatile(DDRC, 0b11);
-	}
+    small_delay();
+    unsafe {
+        write_volatile(DDRC, 0b11);
+    }
 
     loop {
-		unsafe {
-			let num = 22.625f32;
-			if num < 0.0 {
-				// Code executes!
-				write_volatile(PORTC, 0);
-				small_delay();
-				write_volatile(PORTC, 0xff);
-				small_delay();
-			}
-			large_delay();
-			if 22.625f32 < 0.0 {
-				// Code does NOT execute
-				// Note to self: net LED
-				write_volatile(PORTC, 1);
-				small_delay();
-				write_volatile(PORTC, 0xff);
-				small_delay();
-			}
-			large_delay();
-			if 22.625f32 >= 0.0 {
-				// Code executes
-				// Note to self: stat LED
-				write_volatile(PORTC, 2);
-				small_delay();
-				write_volatile(PORTC, 0xff);
-				small_delay();
-			}
-		}
+        unsafe {
+            let num = 22.625f32;
+            if num < 0.0 {
+                // Code executes!
+                write_volatile(PORTC, 0);
+                small_delay();
+                write_volatile(PORTC, 0xff);
+                small_delay();
+            }
+            large_delay();
+            if 22.625f32 < 0.0 {
+                // Code does NOT execute
+                // Note to self: net LED
+                write_volatile(PORTC, 1);
+                small_delay();
+                write_volatile(PORTC, 0xff);
+                small_delay();
+            }
+            large_delay();
+            if 22.625f32 >= 0.0 {
+                // Code executes
+                // Note to self: stat LED
+                write_volatile(PORTC, 2);
+                small_delay();
+                write_volatile(PORTC, 0xff);
+                small_delay();
+            }
+        }
 
-		large_delay();
-		large_delay();
-	}
+        large_delay();
+        large_delay();
+    }
 }
 #[inline]
 fn small_delay() {
