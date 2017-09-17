@@ -2,47 +2,20 @@
 #![no_std]
 #![no_main]
 
-extern crate arduino;
-use arduino::*;
-use core::ptr::write_volatile;
-
 #[no_mangle]
 pub extern fn main() {
-    small_delay();
-    unsafe {
-        write_volatile(DDRC, 0b11);
-    }
-
-    loop {
-        unsafe {
-                asm!("sei");
-            let num = 22.625f32;
-                asm!("cli");
-            if num < 0.0 {
-                // Code executes!
-                asm!("brne .+0");
-                asm!("sleep");
-                asm!("nop");
-            }
-            else {
-                asm!("breq .+0");
-                asm!("sleep");
-                asm!("cli");
-            }
-                asm!("sei");
-            large_delay();
-        }
-
-        large_delay();
-        large_delay();
-    }
-}
-#[inline]
-fn small_delay() {
-    for _ in 0..2500 { }
-}
-fn large_delay() {
-    for _ in 0..10 { small_delay() }
+	unsafe {
+		let num = 22.625f32;
+		if num < 0.0 {
+			// Code executes!
+			asm!("cli");
+			asm!("sleep");
+		}
+		else {
+			asm!("cli");
+			asm!("rjmp .-2");
+		}
+	}
 }
 
 pub mod std {

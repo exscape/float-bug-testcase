@@ -2,6 +2,3 @@
 name = "float-bug-testcase"
 version = "0.1.0"
 authors = ["Thomas Backman <serenity@exscape.org>"]
-
-[dependencies]
-arduino = "0.1"
